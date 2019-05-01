@@ -1,19 +1,15 @@
 import org.sql2o.Connection;
 
+import java.util.List;
+
 public class Vendor extends Users {
 
-    public String productCategory;
     //CONSTANTS
     public static final String ROLE = "vendor";
 
-    public Vendor(String productCategory, String name, String role) {
-        this.productCategory = productCategory;
+    public Vendor(String name, String role) {
         this.name = name;
-        this.role = role;
-    }
-
-    public String getProductCategory() {
-        return productCategory;
+        this.role = ROLE;
     }
 
     @Override
@@ -44,14 +40,52 @@ public class Vendor extends Users {
     //save vendor into db
     public void save() {
         try (Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO animals (name, type, sightingid, daterecorded) VALUES (:name, :type, :sightingId, now());";
+            String sql = "INSERT INTO users (name, role) VALUES (:name, :role);";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
-                    .addParameter("type", this.type)
-                    .addParameter("sightingId", this.sightingId)
-                    .addParameter("dateRecorded", this.dateRecorded)
+                    .addParameter("role", this.role)
                     .executeUpdate()
                     .getKey();
+        }
+    }
+
+    //get all vendors
+    public static List<Vendor> all() {
+        String sql = "SELECT * FROM users WHERE role='vendor';";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Vendor.class);
+        }
+    }
+
+    //find animals by id
+    public static Vendor find(int id) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM users where id=:id";
+            Vendor vendor = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Vendor.class);
+            return vendor;
+        }
+    }
+//
+    //update an Vendor
+    public void update(String name) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "UPDATE users SET name = :name WHERE id = :id";
+            con.createQuery(sql)
+                    .addParameter("name", name)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }
+    }
+
+    //delete Vendor
+    public void delete() {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "DELETE FROM users WHERE id = :id;";
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
         }
     }
 }
