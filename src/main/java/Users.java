@@ -2,6 +2,8 @@ public abstract class Users {
 
     public int id;
     public String name;
+
+    //CONSTANTS
     public String role;
 
     public int getId() {
