@@ -10,27 +10,27 @@ public class KioskTest {
 
     @Test
     public void Kiosk_instantiatesCorrectly_true() {
-        Kiosk kiosk= new Kiosk("lion");
+        Kiosk kiosk= new Kiosk("lion", 1);
         assertEquals(true, kiosk instanceof Kiosk);
     }
 
     @Test
     public void KioskInstantiatesWithName_true() throws Exception {
-        Kiosk Kiosk = new Kiosk("lion");
+        Kiosk Kiosk = new Kiosk("lion", 1);
         assertEquals("lion", Kiosk.getName());
 
     }
 
     @Test
     public void equals_returnsTrueIfNameAreSame_true() {
-        Kiosk Kiosk = new Kiosk("lion");
-        Kiosk Kiosk1 = new Kiosk("lion");
+        Kiosk Kiosk = new Kiosk("lion", 1);
+        Kiosk Kiosk1 = new Kiosk("lion", 1);
         assertTrue(Kiosk.equals(Kiosk1));
     }
 
     @Test
     public void save_insertsObjectIntoDatabase_kitenge() {
-        Kiosk testKiosk= new Kiosk("lion");
+        Kiosk testKiosk= new Kiosk("lion", 1);
         testKiosk.save();
         assertTrue(Kiosk.all().get(0).equals(testKiosk));
     }
@@ -38,9 +38,9 @@ public class KioskTest {
     //return all instances of Kiosk
     @Test
     public void all_returnsAllInstancesOfKiosk_true() {
-        Kiosk firstKiosk = new Kiosk("lion");
+        Kiosk firstKiosk = new Kiosk("lion", 1);
         firstKiosk.save();
-        Kiosk secondKiosk = new Kiosk("kangaroo");
+        Kiosk secondKiosk = new Kiosk("kangaroo", 1);
         secondKiosk.save();
         assertEquals(true, Kiosk.all().get(0).equals(firstKiosk));
         assertEquals(true, Kiosk.all().get(1).equals(secondKiosk));
@@ -49,7 +49,7 @@ public class KioskTest {
     //saving our ids form the db to our classes
     @Test
     public void save_assignsIdToObject() {
-        Kiosk testKiosk= new Kiosk("lion");
+        Kiosk testKiosk= new Kiosk("lion", 1);
         testKiosk.save();
         Kiosk savedKiosk = Kiosk.all().get(0);
         assertEquals(testKiosk.getId(), savedKiosk.getId());
@@ -58,9 +58,9 @@ public class KioskTest {
     //find Kiosk based on their id
     @Test
     public void find_returnsKioskWithSameId_secondKiosk() {
-        Kiosk firstKiosk= new Kiosk("camel");
+        Kiosk firstKiosk= new Kiosk("camel", 1);
         firstKiosk.save();
-        Kiosk secondKiosk = new Kiosk("wathog");
+        Kiosk secondKiosk = new Kiosk("wathog", 2);
         secondKiosk.save();
         assertEquals(Kiosk.find(secondKiosk.getId()), secondKiosk);
     }
@@ -68,7 +68,7 @@ public class KioskTest {
     //update Kiosk
     @Test
     public void update_updatesKioskName_true() {
-        Kiosk myKiosk= new Kiosk("lion");
+        Kiosk myKiosk= new Kiosk("lion", 1);
         myKiosk.save();
         myKiosk.update("elephant");
         assertEquals("elephant", Kiosk.find(myKiosk.getId()).getName());
@@ -76,7 +76,7 @@ public class KioskTest {
 
     @Test
     public void delete_deletesKiosk_true() {
-        Kiosk myKiosk = new Kiosk("lion");
+        Kiosk myKiosk = new Kiosk("lion", 1);
         myKiosk.save();
         int myKioskId = myKiosk.getId();
         myKiosk.delete();
