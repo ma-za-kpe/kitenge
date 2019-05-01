@@ -36,7 +36,7 @@ Kitenge is an online market, where everything African (such as african jewellery
 ## In PSQL:
 1. Run psql in terminal
 2. CREATE DATABASE kitenge;
-3. CREATE TABLE user (id serial PRIMARY KEY, name VARCHAR, productCategory VARCHAR, role VARCHAR);
+3. CREATE TABLE user (id serial PRIMARY KEY, name VARCHAR, role VARCHAR);
 4. CREATE DATABASE kitenge_test WITH TEMPLATE kitenge;
 5. CREATE TABLE product (id serial PRIMARY KEY, name varchar, price int,  imageUrl varchar);
 6. DROP DATABASE kitenge_test;
