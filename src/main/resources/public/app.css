@@ -1,12 +1,19 @@
 
+
+.navbar{
+background-color: #150E00;
+color: white;
+}
+
 .navbar-brand{
 font-size: 50px;
-color: black;
+color: white;
 }
 
 .nav-item{
 font-size: 30px;
-color: black;
+color: white;
+
 }
 
  span{
@@ -15,5 +22,9 @@ color: black;
 
   .span{
   font-size:20px;
+  color: white;
   }
-
+.find {
+color: white;
+border: 1px solid white;
+}
