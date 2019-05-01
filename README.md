@@ -7,7 +7,7 @@ Kitenge is an online market, where everything African (such as african jewellery
 3. Tom Orenge
 4. Maku Mazakpe - TEAM LEADER
 
-##PROBLEM STATEMENT
+## PROBLEM STATEMENT
 
  East Africa does not have a single market for its arts and crafts, so most people don’t know what’s new and trending in the crafts industry and most crafts sellers have little market share to showcase their items.
 
