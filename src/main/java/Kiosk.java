@@ -4,8 +4,11 @@ import java.util.List;
 
 public class Kiosk extends Users {
 
-    public Kiosk(String name) {
+    private int userId;
+
+    public Kiosk(String name, int userId) {
         this.name = name;
+        this.userId = userId;
     }
 
     @Override
@@ -16,6 +19,10 @@ public class Kiosk extends Users {
     @Override
     public String getName() {
         return super.getName();
+    }
+
+    public int getUserId() {
+        return userId;
     }
 
     @Override
@@ -31,9 +38,10 @@ public class Kiosk extends Users {
     //save Kiosk into db
     public void save() {
         try (Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO kiosk (name) VALUES (:name);";
+            String sql = "INSERT INTO kiosk (name, userid) VALUES (:name, :userid);";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
+                    .addParameter("userid", this.userId)
                     .executeUpdate()
                     .getKey();
         }

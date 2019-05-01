@@ -43,6 +43,7 @@ Kitenge is an online market, where everything African (such as african jewellery
 7. CREATE DATABASE kitenge_test WITH TEMPLATE kitenge;
 8. ALTER TABLE product ADD COLUMN userId int;
 9. CREATE TABLE kiosk (id serial PRIMARY KEY, name VARCHAR);
+10. ALTER TABLE kiosk ADD COLUMN userId int;
 
 
 ## ROUTES
