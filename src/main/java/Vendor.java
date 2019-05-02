@@ -24,7 +24,7 @@ public class Vendor extends Users {
 
     @Override
     public String getRole() {
-        return super.getRole();
+        return ROLE;
     }
 
     @Override

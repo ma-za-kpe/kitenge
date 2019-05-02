@@ -5,6 +5,11 @@ background-color: #150E00;
 color: white;
 }
 
+.addProduct{
+background-color: #150E00;
+color: white;
+}
+
 .navbar-brand{
 font-size: 50px;
 color: white;
@@ -28,3 +33,26 @@ color: white;
 color: white;
 border: 1px solid white;
 }
+.vendorForm{
+border: 3px solid #150E00;
+}
+
+.mform{
+border-right: 3px solid #150E00;
+}
+.vendorWelcome{
+font-size:50px;
+color: #150E00;
+}
+
+.form{
+height:500px;
+}
+
+.addVendorbtn{
+background-color: #150E00;
+color:white;
+}
+
+
+

@@ -1,0 +1,64 @@
+<div class="container vendorForm">
+<div class="row">
+    <div class="col-md-12 mform text-center">
+    #if ($name)
+      Welcome $name
+
+    #else
+      <p>Session is null!!!!</p>
+    #end
+    <h1>WELCOME TO YOUR DASHBOARD: $name</h1>
+    <h2>KIOSK NAME: $kname</h2>
+ </div>
+ </div>
+
+  <div class="row">
+  <div class="col-md-4 text-center">
+
+  </div>
+  <div class="col-md-4 text-center">
+     <a href="/addProduct">
+             <button type="button" class="btn text-center btn-lg addProduct mt-5 mb-5 btn-rounded"><span>ADD PRODUCT</span></button>
+     </a>
+   </div>
+    <div class="col-md-4 text-center">
+
+      </div>
+ </div>
+
+ <div class="row">
+
+ <div class="col-md-4 text-center">
+       <div class="col-md-12 mform text-center">
+
+        <!-- Default form login -->
+           <form class="text-center border border-light p-5" action="/addNewKiosk" method="post">
+
+               <p class="h4 mb-4">Sign in</p>
+
+               <!-- Email -->
+               <input type="kname" name="kname" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Name">
+
+               <!-- Password -->
+               <input type="userId" name="userId" type="userId" value=" $v.getId()" class="form-control mb-4" placeholder="Role">
+
+
+               <!-- Sign in button -->
+               <button class="btn addVendorbtn btn-block my-4" type="submit"> <span>CREATE KIOSK</span> </button>
+
+
+           </form>
+           <!-- Default form login -->
+
+        </div>
+       </div>
+       <div class="col-md-4 text-center">
+
+             </div>
+             <div class="col-md-4 text-center">
+
+                   </div>
+
+ </div>
+
+</div>
