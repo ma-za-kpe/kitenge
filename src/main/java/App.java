@@ -1,6 +1,7 @@
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,36 +47,38 @@ public class App {
         get("/addProduct", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             model.put("product", Product.all());
+            model.put("id", request.session().attribute("id"));
             model.put("userId",  request.session().attribute("userId"));
             model.put("kname",  request.session().attribute("kname"));
             model.put("template", "templates/addProductForm.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
-        //add a new product
+
         post("/addNewProduct", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            Kiosk kiosk = Kiosk.find(Integer.parseInt(request.queryParams("userId")));
+            Vendor vendor = Vendor.find(Integer.parseInt(request.queryParams("userId")));
             String inputtedUsername = request.queryParams("name");
             String price = request.queryParams("price");
-            String imageUrl = request.queryParams("imageurl");
+
 
             request.session().attribute("name", inputtedUsername);
             request.session().attribute("price", price);
-            request.session().attribute("imageurl", imageUrl);
-            request.session().attribute("userId", kiosk.getId());
+
+            request.session().attribute("userId", vendor.getId());
             model.put("name", inputtedUsername);
             model.put("price", price);
-            model.put("imageurl", imageUrl);
-            model.put("userId", kiosk.getId());
+            model.put("userId", vendor.getId());
 
-            Product newProduct = new Product(inputtedUsername, Integer.parseInt(price), imageUrl, kiosk.getId());
+            Product newProduct = new Product(inputtedUsername, Integer.parseInt(price), vendor.getId());
             newProduct.save();
             model.put("newProduct", newProduct);
             String url = String.format("/myKiosk", newProduct.getId());
             response.redirect(url);
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
+
+
 
         /******************************
          * kiosk
@@ -84,15 +87,10 @@ public class App {
         //add a new kiosk
         post("/addNewKiosk", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-
             Vendor vendor = Vendor.find(Integer.parseInt(request.queryParams("userId")));
             String inputtedKioskname = request.queryParams("kname");
-
             request.session().attribute("kname", inputtedKioskname);
-//            request.session().attribute("userId", vendor.getId());
             model.put("kname", inputtedKioskname);
-//            model.put("userId", vendor.getId());
-
             Kiosk newKiosk = new Kiosk(inputtedKioskname, vendor.getId());
             newKiosk.save();
             model.put("newKiosk", newKiosk);
@@ -101,9 +99,10 @@ public class App {
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
-        /******************************
-         * COMMON USER
-         *****************************/
+
+                /******************************
+                 * COMMON USER
+                 *****************************/
 
         /******************************
          * VENDOR
@@ -117,20 +116,18 @@ public class App {
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
-        //add a new vendor
         post("/addNewVendor", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-
             String inputtedUsername = request.queryParams("name");
             String role = request.queryParams("role");
-
             request.session().attribute("name", inputtedUsername);
             request.session().attribute("role", role);
             model.put("name", inputtedUsername);
             model.put("role", role);
-
             Vendor newVendor = new Vendor(inputtedUsername, role);
             newVendor.save();
+            int id = newVendor.getId();
+            request.session().attribute("id", id);
             model.put("newVendor", newVendor);
             String url = String.format("/myKiosk", newVendor.getId());
             response.redirect(url);
@@ -138,13 +135,15 @@ public class App {
         }, new VelocityTemplateEngine());
 
 
-        //get all vendors
+
         get("/myKiosk", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             request.session().maxInactiveInterval(600);
-            model.put("v", Vendor.all());
+
+            // model.put("v", Vendor.all());
+            model.put("id", request.session().attribute("id"));
             model.put("name",  request.session().attribute("name"));
-            model.put("userId",  request.session().attribute("userId"));
+            // model.put("userId",  request.session().attribute("userId"));
             model.put("template", "templates/myKiosk.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());

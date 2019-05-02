@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Kiosk extends Users {
 
-    private int userId;
+    private static int userId;
 
     public Kiosk(String name, int userId) {
         this.name = name;
@@ -21,7 +21,7 @@ public class Kiosk extends Users {
         return super.getName();
     }
 
-    public int getUserId() {
+    public static int getUserId() {
         return userId;
     }
 
@@ -38,10 +38,10 @@ public class Kiosk extends Users {
     //save Kiosk into db
     public void save() {
         try (Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO kiosk (name, userid) VALUES (:name, :userid);";
+            String sql = "INSERT INTO kiosk (name, userid) VALUES (:name, :userId);";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
-                    .addParameter("userid", this.userId)
+                    .addParameter("userId", this.userId)
                     .executeUpdate()
                     .getKey();
         }
@@ -55,7 +55,7 @@ public class Kiosk extends Users {
         }
     }
 
-    //find animals by id
+    //find kiosk by id
     public static Kiosk find(int id) {
         try(Connection con = DB.sql2o.open()) {
             String sql = "SELECT * FROM kiosk where id=:id";
@@ -65,6 +65,7 @@ public class Kiosk extends Users {
             return Kiosk;
         }
     }
+
     //
     //update an Kiosk
     public void update(String name) {

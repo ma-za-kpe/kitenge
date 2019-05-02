@@ -35,6 +35,13 @@ public class KioskTest {
         assertTrue(Kiosk.all().get(0).equals(testKiosk));
     }
 
+    @Test
+    public void SightingInstantiatesWithSightingId_true() throws Exception {
+        Kiosk kiosk = new Kiosk("lion",  1);
+        assertEquals(1, kiosk.getUserId());
+
+    }
+
     //return all instances of Kiosk
     @Test
     public void all_returnsAllInstancesOfKiosk_true() {

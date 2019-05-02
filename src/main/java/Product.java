@@ -5,13 +5,11 @@ import java.util.List;
 public class Product extends Users{
 
     private int price;
-    private String imageUrl;
     private int userId;
 
-    public Product(String name, int price, String imageUrl, int userId) {
+    public Product(String name, int price, int userId) {
         this.name = name;
         this.price = price;
-        this.imageUrl =imageUrl;
         this.userId = userId;
     }
 
@@ -27,10 +25,6 @@ public class Product extends Users{
 
     public int getPrice() {
         return price;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
     }
 
     public int getUserId() {
@@ -50,11 +44,10 @@ public class Product extends Users{
     //save Product into db
     public void save() {
         try (Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO product (name, price, imageurl, userid) VALUES (:name, :price, :imageurl, :userid);";
+            String sql = "INSERT INTO product (name, price, userid) VALUES (:name, :price, :userid);";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
                     .addParameter("price", this.price)
-                    .addParameter("imageurl", this.imageUrl)
                     .addParameter("userid", this.userId)
                     .executeUpdate()
                     .getKey();

@@ -67,7 +67,20 @@ public class Vendor extends Users {
             return vendor;
         }
     }
-//
+
+    //find vendor by id
+    public static Vendor findVendorByName(String name) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT id FROM users where name=:name";
+            Vendor vendor = con.createQuery(sql)
+                    .addParameter("name", name)
+                    .executeAndFetchFirst(Vendor.class);
+            return vendor;
+        }
+    }
+
+
+    //
     //update an Vendor
     public void update(String name) {
         try(Connection con = DB.sql2o.open()) {

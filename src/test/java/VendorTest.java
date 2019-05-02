@@ -63,6 +63,15 @@ public class VendorTest {
         assertEquals(testVendor.getId(), savedVendor.getId());
     }
 
+    //saving our ids form the db to our classes
+    @Test
+    public void save_IdToObject() {
+        Vendor testVendor= new Vendor("lion", "vendor");
+        testVendor.save();
+        Vendor savedVendor = Vendor.findVendorByName("lion");
+        assertEquals(testVendor.getId(), savedVendor.getId());
+    }
+
     //find vendor based on their id
     @Test
     public void find_returnsVendorWithSameId_secondVendor() {
