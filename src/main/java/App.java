@@ -26,6 +26,10 @@ public class App {
 
         port(port);
 
+        /******************************
+         * LOGIN AND INDEX PAGES
+         *****************************/
+
         //get main page
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
