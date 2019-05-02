@@ -1,1 +1,50 @@
-WELCOME TO KITENGE
+<div class="row">
+  <div class="col-md-12">
+
+    <div id="mdb-lightbox-ui"></div>
+
+    <div class="mdb-lightbox no-margin">
+#foreach($product in $products)
+      <figure class="col-md-4">
+        <!-- Card -->
+        <div class="card">
+
+          <!-- Card image -->
+          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
+
+          <!-- Card content -->
+          <div class="card-body">
+
+            <!-- Title -->
+            <h4 class="card-title"><a>$product.getName()</a></h4>
+            <!-- Text -->
+            <p class="card-text">$product.getPrice()</p>
+            <!-- Button -->
+
+            <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <a href="/cart" class="btn btn-lg addVendorbtn">ADD TO CART</a>
+                </div>
+                <div class="col-sm">
+                   <a href="#" class="btn btn-lg addVendorbtn"><i class="fas icon fa-thumbs-up fa-3x"></i></a>
+                </div>
+                <div class="col-sm">
+                   <a href="#" class="btn btn-lg addVendorbtn"><i class="fas icon fa-thumbs-down fa-3x"></i></a>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+        </div>
+        <!-- Card -->
+      </figure>
+#end
+
+    </div>
+
+  </div>
+</div>

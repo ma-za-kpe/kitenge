@@ -3,6 +3,7 @@
 .navbar{
 background-color: #150E00;
 color: white;
+height:80px;
 }
 
 .addProduct{
@@ -54,5 +55,7 @@ background-color: #150E00;
 color:white;
 }
 
-
+.bg{
+margin-top:-60px;
+}
 

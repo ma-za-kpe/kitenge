@@ -15,9 +15,11 @@ public class DatabaseRule extends ExternalResource {
             String deleteUsersQuery = "DELETE FROM users *;";
             String deleteProductQuery = "DELETE FROM product *;";
             String deleteKioskQuery = "DELETE FROM kiosk *;";
+            String deleteCartQuery = "DELETE FROM cart *;";
             con.createQuery(deleteUsersQuery).executeUpdate();
             con.createQuery(deleteProductQuery).executeUpdate();
             con.createQuery(deleteKioskQuery).executeUpdate();
+            con.createQuery(deleteCartQuery).executeUpdate();
         }
     }
 

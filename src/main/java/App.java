@@ -34,6 +34,7 @@ public class App {
         //get main page
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
+            model.put("products", Product.all());
             model.put("template", "templates/index.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
@@ -42,6 +43,46 @@ public class App {
         /******************************
          * PRODUCT
          *****************************/
+
+        //get main page
+        get("/cart", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put("carts", request.session().attribute("carts"));
+            model.put("template", "templates/cart.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+//        //get stylistclient by id
+//        get("/product/:id", (request, response) -> {
+//            Map<String, Object> model = new HashMap<String, Object>();
+//            Product product = Product.find(Integer.parseInt(request.params(":id")));
+//            model.put("products", product);
+//            model.put("template", "templates/cart.vtl");
+//            return new ModelAndView(model, layout);
+//        }, new VelocityTemplateEngine());
+
+        post("/addProductToCart", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+
+            ArrayList<Cart> carts = request.session().attribute("carts");
+            if (carts == null) {
+                carts = new ArrayList<Cart>();
+                request.session().attribute("carts", carts);
+            }
+
+            Vendor vendor = Vendor.find(Integer.parseInt(request.queryParams("userId")));
+            String inputtedUsername = request.queryParams("name");
+            String price = request.queryParams("price");
+
+            Cart newCart = new Cart(inputtedUsername, Integer.parseInt(price), vendor.getId());
+//            newCart.save();
+
+            carts.add(newCart);
+
+            String url = String.format("/cart", newCart.getId());
+            response.redirect(url);
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
 
         //get add product form
         get("/addProduct", (request, response) -> {

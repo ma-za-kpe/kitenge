@@ -1,0 +1,13 @@
+WELCOME TO CART
+
+<h1>Task list!</h1>
+
+#if ($carts)
+  <ul>
+    #foreach ($cart in $carts)
+      <li>$cart.getName()</li>
+    #end
+  </ul>
+#else
+  <p>No tasks!</p>
+#end
