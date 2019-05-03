@@ -89,6 +89,7 @@ Kitenge is an online market, where everything African (such as african jewellery
 
 ## SCREENSHOTS
 [![Screenshot-from-2019-05-03-08-36-08.png](https://i.postimg.cc/d3X234wG/Screenshot-from-2019-05-03-08-36-08.png)](https://postimg.cc/2LQbXdq5)
+[![Screenshot-from-2019-05-03-08-39-38.png](https://i.postimg.cc/9QvcbTF1/Screenshot-from-2019-05-03-08-39-38.png)](https://postimg.cc/WdwRbdZJ)
 
 ## Testing
 gradle test
