@@ -69,10 +69,14 @@ margin-top:-60px;
  }
 
  .header{
- font-size:30px;
+ font-size:40px;
  }
 
 .admin{
  font-size:30px;
  font-weight:900px;
+}
+
+.price{
+font-size:30px;
 }

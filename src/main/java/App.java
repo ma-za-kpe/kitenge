@@ -293,7 +293,27 @@ public class App {
             Vendor vendor = Vendor.find(Integer.parseInt(request.params("vendors_id")));
             String name = request.queryParams("name");
             vendor.update(name);
-            String url = String.format("/users", vendor.getId());
+            String url = String.format("/vendors", vendor.getId());
+            response.redirect(url);
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        //get the updated kiosk page
+        get("/kiosksEdit/:kiosks_id", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            Kiosk kiosk = Kiosk.find(Integer.parseInt(request.params("kiosks_id")));
+            model.put("kiosk", kiosk);
+            model.put("template", "templates/kiosksEdit.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        //update kiosk by id
+        post("/kiosksEdit/:kiosks_id/edit", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            Kiosk kiosk = Kiosk.find(Integer.parseInt(request.params("kiosks_id")));
+            String name = request.queryParams("name");
+            kiosk.update(name);
+            String url = String.format("/kiosks", kiosk.getId());
             response.redirect(url);
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
