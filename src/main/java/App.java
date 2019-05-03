@@ -258,5 +258,46 @@ public class App {
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
+        //get the updated product page
+        get("/productsEdit/:products_id", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            Product product = Product.find(Integer.parseInt(request.params(":products_id")));
+            model.put("product", product);
+            model.put("template", "templates/productsEdit.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        //update product by id
+        post("/productsEdit/:products_id/edit", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            Product product = Product.find(Integer.parseInt(request.params("products_id")));
+            String name = request.queryParams("name");
+            product.update(name);
+            String url = String.format("/products", product.getId());
+            response.redirect(url);
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        //get the updated vendor page
+        get("/vendorsEdit/:vendors_id", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            Vendor vendor = Vendor.find(Integer.parseInt(request.params("vendors_id")));
+            model.put("vendor", vendor);
+            model.put("template", "templates/vendorsEdit.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        //update vendor by id
+        post("/vendorsEdit/:vendors_id/edit", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            Vendor vendor = Vendor.find(Integer.parseInt(request.params("vendors_id")));
+            String name = request.queryParams("name");
+            vendor.update(name);
+            String url = String.format("/users", vendor.getId());
+            response.redirect(url);
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+
     }
 }

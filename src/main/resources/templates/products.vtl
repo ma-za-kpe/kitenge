@@ -14,7 +14,7 @@
           #foreach($p in $products)
            <tr>
             <td class="header">$p.getName()</td>
-            <td><a href="/stylistsdit/$stylists.getId()"><button type="submit" class="btn btn-lg addVendorbtn btn-lg "><p class="add-btn">Edit</p></button></a></td>
+            <td><a href="/productsEdit/$p.getId()"><button type="submit" class="btn btn-lg addVendorbtn btn-lg "><p class="add-btn">Edit</p></button></a></td>
             <td>
              <form action="/products/$p.getId()/delete" method="post">
                <a href="/"><button type="submit" class="btn delete btn-lg addVendorbtn">
