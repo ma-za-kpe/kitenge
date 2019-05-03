@@ -16,13 +16,13 @@
             <td class="header">$p.getName()</td>
             <td><a href="/stylistsdit/$stylists.getId()"><button type="submit" class="btn btn-lg addVendorbtn btn-lg "><p class="add-btn">Edit</p></button></a></td>
             <td>
-             <form action="/stylists/$stylists.getId()/delete" method="post">
+             <form action="/products/$p.getId()/delete" method="post">
                <a href="/"><button type="submit" class="btn delete btn-lg addVendorbtn">
                  <p class="add-btn">Delete</p></button>
                </a>
              </form>
               </td>
-              <td><a href="/stylists/$stylists.getId()"><button type="submit" class="btn add btn-lg addVendorbtn "><p class="add-btn">Details</p></button></a></td>
+              <td><a href="/products/$products.getId()"><button type="submit" class="btn add btn-lg addVendorbtn "><p class="add-btn">Details</p></button></a></td>
           </tr>
           #end
         </tbody>

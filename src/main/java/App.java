@@ -120,7 +120,6 @@ public class App {
         }, new VelocityTemplateEngine());
 
 
-
         /******************************
          * kiosk
          *****************************/
@@ -141,9 +140,9 @@ public class App {
         }, new VelocityTemplateEngine());
 
 
-                /******************************
-                 * COMMON USER
-                 *****************************/
+        /******************************
+         * COMMON USER
+         *****************************/
 
         /******************************
          * VENDOR
@@ -174,8 +173,6 @@ public class App {
             response.redirect(url);
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
-
-
 
         get("/myKiosk", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
@@ -224,6 +221,40 @@ public class App {
             Map<String, Object> model = new HashMap<String, Object>();
             model.put("products", Product.all());
             model.put("template", "templates/products.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        //delete a vendor
+        post("/vendors/:vendors_id/delete", (request, response) -> {
+            HashMap<String, Object> model = new HashMap<String, Object>();
+            Vendor vendor = Vendor.find(Integer.parseInt(request.params("vendors_id")));
+            vendor.delete();
+            model.put("vendor", vendor);
+            String url = String.format("/vendors", vendor.getId());
+            response.redirect(url);
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+
+        //delete a kiosk
+        post("/kiosks/:kiosks_id/delete", (request, response) -> {
+            HashMap<String, Object> model = new HashMap<String, Object>();
+            Kiosk kiosk = Kiosk.find(Integer.parseInt(request.params("kiosks_id")));
+            kiosk.delete();
+            model.put("kiosk", kiosk);
+            String url = String.format("/kiosks", kiosk.getId());
+            response.redirect(url);
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        //delete a Product
+        post("/products/:product_id/delete", (request, response) -> {
+            HashMap<String, Object> model = new HashMap<String, Object>();
+            Product product = Product.find(Integer.parseInt(request.params("product_id")));
+            product.delete();
+            model.put("product", product);
+            String url = String.format("/products", product.getId());
+            response.redirect(url);
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
