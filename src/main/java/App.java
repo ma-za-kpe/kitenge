@@ -184,6 +184,7 @@ public class App {
             // model.put("v", Vendor.all());
             model.put("id", request.session().attribute("id"));
             model.put("name",  request.session().attribute("name"));
+            model.put("kname",  request.session().attribute("kname"));
             // model.put("userId",  request.session().attribute("userId"));
             model.put("template", "templates/myKiosk.vtl");
             return new ModelAndView(model, layout);
