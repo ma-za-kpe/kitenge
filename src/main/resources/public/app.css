@@ -59,3 +59,16 @@ color:white;
 margin-top:-60px;
 }
 
+.add-btn{
+ font-size:20px;
+ }
+
+ .delete{
+ background-color: #FA0000;
+  font-size:20px;
+ }
+
+ .header{
+ font-size:30px;
+ }
+

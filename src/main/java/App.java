@@ -194,5 +194,37 @@ public class App {
          * ADMIN
          *****************************/
 
+        //get main page
+        get("/admin", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put("products", Product.all());
+            model.put("template", "templates/admin.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        //get kiosk page
+        get("/kiosks", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put("kiosks", Kiosk.all());
+            model.put("template", "templates/kiosks.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        //get users page
+        get("/vendors", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put("vendors", Vendor.all());
+            model.put("template", "templates/users.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        //get users page
+        get("/products", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put("products", Product.all());
+            model.put("template", "templates/products.vtl");
+            return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
     }
 }
